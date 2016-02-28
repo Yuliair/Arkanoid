@@ -12,6 +12,7 @@ public class Wall {
     private int brickWidth, brickHeight;
     private int width, height;
     private int m, n;
+    int rest;
     private Field field;
 
 
@@ -29,6 +30,7 @@ public class Wall {
         this.width=width;
         this.height = height;
         this.field = field;
+        rest = m*n;
     }
 
      public Boolean hereIsWall(int x, int y){
@@ -58,8 +60,11 @@ public class Wall {
     }
 
     public void kill(int i, int j){
-        if(i>-1&&j>-1&&i<m&&j<n)
-        wall[i][j]=0;
+        if(i>-1&&j>-1&&i<m&&j<n) {
+            wall[i][j] = 0;
+            rest--;
+            if (rest==0) field.haveNotAim();
+        }
         else System.out.println("No such brick i j  "+i+" "+j);
     }
 

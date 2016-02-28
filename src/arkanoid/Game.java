@@ -9,11 +9,12 @@ public class Game {
     public void createAndShow() {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(350, 600);
+        frame.setSize(600, 600);
 
-        MyPanel panel = new MyPanel(this, 4, 7);
+        MyPanel panel = new MyPanel(this, 2, 3);
         //panel.setLayout(null);
-        frame.addKeyListener(panel);
+        frame.addMouseMotionListener(panel);
+        frame.addMouseListener(panel);
         frame.add(panel);
         //  frame.pack();
         frame.setVisible(true);

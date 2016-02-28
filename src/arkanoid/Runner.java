@@ -9,12 +9,14 @@ public class Runner {//Blade
     int directX, directY;
     private final int lengthX = 1;
     private final int lengthY = 1;
+    private Field  field;
 
-    public Runner(int x, int y, int radius){
+    public Runner(int x, int y, int radius, Field field){
        setXY(x,y);
        setRadius(radius);
         directX=1;
-        directY=1;
+        directY =1;
+        this.field = field;
     }
     public void setXY(int x, int y){
         this.x = x;
@@ -47,15 +49,17 @@ public class Runner {//Blade
 
     public void setDirectX(int i){
         directX = i;
+        if (!field.getHaveAim()) field.actionNext();
     }
 
     public void  setDirectY(int i){
         directY = i;
+        if (!field.getHaveAim()) field.actionNext();
     }
 
     public void go(){
         x=x+directX*lengthX;
-        y=y+directY*lengthY;
+        y=y+ directY *lengthY;
     }
 
 }

@@ -16,7 +16,7 @@ public class Timer extends Thread{
         int sleep;
         while (tic_tac){
             try {
-                sleep = 7-i/5000;
+                sleep = 5-i/5000;
                 if (sleep<1) sleep = 1;
                 Thread.sleep(sleep);
                 i++;
