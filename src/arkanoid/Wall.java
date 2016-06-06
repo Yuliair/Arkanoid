@@ -33,13 +33,13 @@ public class Wall {
         rest = m*n;
     }
 
-     public Boolean hereIsWall(int x, int y){
+     public Boolean hereIsWall(int x, int y) throws Exception {
         return this.hereIsWallInter(x-field.wallBeginX, y-field.wallBeginY);
     }
 
 
 
-    public Boolean hereIsWallInter(int x, int y)  {//x y from begin of wall
+    public Boolean hereIsWallInter(int x, int y) throws Exception {//x y from begin of wall
         //return true and killing brick if hereIsWall
         if (x<0 || y < 0 || x > width-distHor  || y>  height-distVer)
             return false;
@@ -49,7 +49,7 @@ public class Wall {
         int tailY = y%(brickHeight + distVer);
         if( tailX >= 0 && tailX <= brickWidth)  j = x /( brickWidth+ distHor);
         if( tailY >= 0 && tailY <= brickHeight) i = y / (brickHeight + distVer);
-        if(i >= 0 && j>= 0) {
+        if(i >= 0 && j>= 0 && i < m && j < n) {
             if(wall[i][j]>0) {
                 this.kill(i, j);
                 field.scoresUp();
@@ -59,11 +59,14 @@ public class Wall {
        return false;
     }
 
-    public void kill(int i, int j){
+    public void kill(int i, int j) throws Exception {
         if(i>-1&&j>-1&&i<m&&j<n) {
             wall[i][j] = 0;
             rest--;
-            if (rest==0) field.haveNotAim();
+            if (rest==0) {
+                field.haveNotAim();
+                throw new Exception(Const.youWin);
+            }
         }
         else System.out.println("No such brick i j  "+i+" "+j);
     }

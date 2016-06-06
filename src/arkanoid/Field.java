@@ -58,12 +58,9 @@ public class Field {
         //check if Game Over
         if (runner.getY()>= height-runner.getRadius()){
             playing = false;
+            actions = 1;
             throw new Exception("Game over");
         }
-
-
-
-
 
         //check if runner touch boarder up left right
         if (runner.getX()<runner.getRadius()) runner.directX=1;
@@ -72,8 +69,6 @@ public class Field {
 
 
         //check if touch racket or wall
-
-
         checkingWallandRacket();
 
         runner.go();
@@ -117,14 +112,17 @@ public class Field {
         }
     }
 
-        private Boolean hereIsWallOrRacket(int x, int y){
+        private Boolean hereIsWallOrRacket(int x, int y) throws Exception {
             if (wall.hereIsWall(x,y)) return true;
-            return  (x >= racket.leftBoard && x <= racket.leftBoard+racket.width &&
-                     y >= height - racket.height  );
-
+            if  (x >= racket.leftBoard && x <= racket.leftBoard+racket.width &&
+                     y >= height - racket.height  ){
+                runner.setAngle(racket);
+                return true;
+            }
+            return false;
         }
 
-        private void checkingWallandRacket() {
+        private void checkingWallandRacket() throws Exception {
         if (hereIsWallOrRacket(runner.getX(), runner.getRadius() + runner.getY())) runner.setDirectY(-1);
         if (hereIsWallOrRacket(runner.getX(), runner.getY() - runner.getRadius())) runner.setDirectY(1) ;
         if (hereIsWallOrRacket(runner.getX() - runner.getRadius(), runner.getY())) runner.setDirectX(1);
@@ -170,6 +168,7 @@ public class Field {
 
     public void haveNotAim(){
         haveAim = false;
+        playing = false;
         actions = 0;
     }
 

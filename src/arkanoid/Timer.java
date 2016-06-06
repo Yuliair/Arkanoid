@@ -16,7 +16,7 @@ public class Timer extends Thread{
         int sleep;
         while (tic_tac){
             try {
-                sleep = 5-i/5000;
+                sleep = 30-i/1000;
                 if (sleep<1) sleep = 1;
                 Thread.sleep(sleep);
                 i++;
@@ -33,11 +33,15 @@ public class Timer extends Thread{
                     e.printStackTrace();
                 }
                 else{
-                    System.out.println("Oh it's juxt game over");
+                    System.out.println("Oh it's just game over");
                     tic_tac=false;
                 }
             }
 
         }
+    }
+
+    public void stopRunner(){
+        tic_tac = false;
     }
 }
